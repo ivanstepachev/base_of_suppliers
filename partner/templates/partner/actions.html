@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Action</title>
+</head>
+<body>
+
+<form method="POST" action="{% url 'partner_actions' %}">
+    {% csrf_token %}
+    <input type="date" name="date">
+    <input type="radio" name="by_who" value="by_me">Прямые</input>
+    <input type="radio" name="by_who" value="by_partners">Моих партнеров</input>
+    <input type="submit" value="Найти">
+</form>
+{% for action in actions %}
+<p>{{ action.date }}-{{ action.verb }}</p>
+{% endfor %}
+</body>
+</html>

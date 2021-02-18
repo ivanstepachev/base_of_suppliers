@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Поиск</h2>
+<form method="get" action="{% url 'partners_list' %}">
+    <input type="text" name="search">
+    <input type="submit" value="Найти">
+</form>
+{% for partner in partners %}
+<p>{{ partner.name }} - {{ partner.user.email }} - {{ partner.partners.count }}</p>
+{% endfor %}
+</body>
+</html>

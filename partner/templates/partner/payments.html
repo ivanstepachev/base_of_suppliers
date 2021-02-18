@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выплаты</title>
+<!--    <script language="JavaScript">-->
+<!--    function toggle(source) {-->
+<!--    checkboxes = document.getElementsByName('payment');-->
+<!--    for(var i=0, n=checkboxes.length;i<n;i++) {-->
+<!--    checkboxes[i].checked = source.checked;-->
+<!--  }-->
+<!--}-->
+</script>
+</head>
+<body>
+<h1>Заказанные выплаты</h1>
+
+{% for payment in payments %}
+{% csrf_token %}
+<form method="POST" action="{% url 'confirm_payments' %}">
+    <input type="hidden" name="confirm" value="{{ payment.id }}">
+    <p><input type="submit" value="Подтвредить">Сумма {{ payment.amount }} от {{ payment.partner.name }} дата {{ payment.date }} - Общая сумма {{ payment.partner.balance }}</p>
+</form>
+{% endfor %}
+
+
+</body>
+</html>

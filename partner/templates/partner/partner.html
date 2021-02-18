@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Cabinet{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'base' %}">База</a><br>
+<a href="{% url 'education' %}">Обучение</a><br>
+<a href="{% url 'partner' %}">Партнер</a><br>
+<p>Тут партнерская ссылка и вся стата</p><br>
+<p>Количество</p>
+<h3>Мой баланс</h3>
+<p>{{ balance }}</p>
+<form action="{% url 'partner_payment' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="amount" value="{{ balance }}">
+    <input type="submit" value="Запросить выплату">
+</form>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p>{{ link }}</p>
+<h3>Мои реффералы:</h3>
+{% for ref in refs %}
+<p>Имя:{{ ref.name }} Его рефералы {{ ref.partners.count }}Дата{{ ref.date }}</p>
+{% endfor %}
+<h2>Журнал:</h2>
+<h3>Мои пополнения</h3>
+{% for action in mentor_actions %}
+<p>+500 {{ action.date}}-{{ action.verb }}</p>
+{% endfor %}
+<h3>Пополнения от партнеров</h3>
+{% for action in grand_mentor_actions %}
+<p>+100 {{ action.date}}-{{ action.verb }}</p>
+{% endfor %}
+
+{% endblock %}

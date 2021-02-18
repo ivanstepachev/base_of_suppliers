@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Cabinet{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_paid %}
+<a href="{% url 'base' %}">База</a><br>
+<a href="{% url 'education' %}">Обучение</a><br>
+<a href="{% url 'partner' %}">Партнер</a><br>
+<p>Тут рассказываем как можно пользоваться сервисом</p><br>
+{% else %}
+<a href="{% url 'first_pay' %}">Оплати</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Main{% endblock %}
+{% block content %}
+<h1>Main page</h1>
+<p>{{ request.user.email }}</p>
+<a href="{% url 'logout' %}">Выйти</a>
+<br>
+<a href="{% url 'login' %}">Логин</a>
+<p>Id вашего рекомендателя {{ id }}</p>
+{% endblock %}
